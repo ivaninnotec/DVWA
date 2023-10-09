@@ -17,7 +17,7 @@ stages:
       pool:
         name: 'Other'
       steps:
-        - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
+        - script: 'echo Initial_stage' 
 
  - stage: 'Scan'
    dependsOn: initial_stage
