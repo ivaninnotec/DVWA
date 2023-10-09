@@ -15,7 +15,7 @@ stages:
    jobs:
     - job: 'initial_stage'
       pool:
-        vmImage: ubuntu-latest
+        name: 'Other'
       steps:
         - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
 
