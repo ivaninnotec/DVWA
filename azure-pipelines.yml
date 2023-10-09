@@ -20,6 +20,7 @@ stages:
         - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
 
  - stage: 'Scan'
+   dependsOn: initial_stage
    jobs:
     - job: 'Scan'
       pool:
