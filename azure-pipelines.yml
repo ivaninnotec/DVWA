@@ -7,21 +7,32 @@ trigger:
 - master
 
 pool:
-  #vmImage: ubuntu-latest
-  name: Default
+  vmImage: ubuntu-latest
 
 variables:
   phpVersion: 7.2
 
-steps:
-- task: Application security testing@2023
-  inputs:
-    projectName: 'Azure-test'
-    enableProxy: false
-    enableSastScan: true
-    CheckmarxService: 'Checkmarx Onprem'
-    fullTeamName: 'CxServer'
-    incScan: false
-    enableDependencyScan: true
-    dependencyServerURL: 'Checkmars SCA'
-    scaTeam: '/CxServer'
+stages:
+ - stage: 'initial-stage'
+   jobs:
+    - job: 'initial-stage'
+      steps:
+        - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
+
+ - stage: 'Scan'
+   jobs:
+    - job: 'Scan'
+      pool:
+        name: 'Default'
+      steps:
+      - task: Application security testing@2023
+        inputs:
+          projectName: 'Azure-test'
+          enableProxy: false
+          enableSastScan: true
+          CheckmarxService: 'Checkmarx Onprem'
+          fullTeamName: 'CxServer'
+          incScan: false
+          enableDependencyScan: true
+          dependencyServerURL: 'Checkmars SCA'
+          scaTeam: '/CxServer'
