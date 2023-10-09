@@ -6,21 +6,22 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
-
-variables:
-  phpVersion: 7.2
+#pool:
+  #vmImage: ubuntu-latest
+  #name: 'Default'
 
 stages:
  - stage: 'initial_stage'
    jobs:
     - job: 'initial_stage'
+      pool:
+        vmImage: ubuntu-latest
       steps:
         - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
 
  - stage: 'Scan'
    dependsOn: initial_stage
+   condition: succeeded()
    jobs:
     - job: 'Scan'
       pool:
