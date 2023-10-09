@@ -13,9 +13,9 @@ variables:
   phpVersion: 7.2
 
 stages:
- - stage: 'initial-stage'
+ - stage: 'initial_stage'
    jobs:
-    - job: 'initial-stage'
+    - job: 'initial_stage'
       steps:
         - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)"' 
 
